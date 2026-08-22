@@ -1,0 +1,15 @@
+<h1>Track a New Job</h1>
+
+<%= form_with url: jobs_path, method: :post, local: true do |form| %>
+  <div>
+    <%= form.label :url, "Job Posting URL" %><br>
+    <%= form.text_field :url, placeholder: "https://boards.greenhouse.io/...", required: true, size: 80 %>
+  </div>
+  
+  <div style="margin-top: 10px;">
+    <%= form.submit "Parse and Add Job" %>
+  </div>
+<% end %>
+
+<br>
+<%= link_to "Back to Jobs", jobs_path %>

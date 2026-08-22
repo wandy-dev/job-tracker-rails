@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "new_contact" do %>
+  <div style="background: #f9fafb; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+    <%= form_with(model: [@company, @contact]) do |f| %>
+      <div style="display: flex; gap: 15px; margin-bottom: 10px;">
+        <div style="flex: 1;">
+          <%= f.label :name, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+          <%= f.text_field :name, required: true, style: "width: 100%; padding: 6px;" %>
+        </div>
+        <div style="flex: 1;">
+          <%= f.label :title, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+          <%= f.text_field :title, style: "width: 100%; padding: 6px;" %>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 15px; margin-bottom: 10px;">
+        <div style="flex: 1;">
+          <%= f.label :email, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+          <%= f.email_field :email, style: "width: 100%; padding: 6px;" %>
+        </div>
+        <div style="flex: 1;">
+          <%= f.label :phone, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+          <%= f.telephone_field :phone, style: "width: 100%; padding: 6px;" %>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <%= f.label :notes, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+        <%= f.text_area :notes, rows: 2, style: "width: 100%; padding: 6px;" %>
+      </div>
+      
+      <div style="display: flex; gap: 10px;">
+        <%= f.submit "Add Contact", class: "btn btn-advance" %>
+        <%= link_to "Cancel", company_path(@company), class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

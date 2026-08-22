@@ -1,0 +1,17 @@
+<%= turbo_stream.replace "activities_feed" do %>
+  <div id="activities_feed">
+    <% if @job.activities.any? %>
+      <%= render @job.activities.order(occurred_at: :desc) %>
+    <% else %>
+      <p>No activities logged yet.</p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "new_activity" do %>
+  <turbo-frame id="new_activity">
+    <div style="margin-bottom: 20px;">
+      <%= link_to "Log Activity", new_job_activity_path(@job), class: "btn btn-advance" %>
+    </div>
+  </turbo-frame>
+<% end %>

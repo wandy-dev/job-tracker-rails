@@ -1,0 +1,74 @@
+<div class="chevron-nav">
+  <% Job::HAPPY_PATH_STATUSES.each_with_index do |step, index| %>
+    <div class="<%= chevron_step_class(@job, index) %>">
+      <%= step.titleize %>
+    </div>
+    <% if index < Job::HAPPY_PATH_STATUSES.length - 1 %>
+      <div class="chevron-separator">></div>
+    <% end %>
+  <% end %>
+
+  <div class="nav-actions">
+    <% if can_advance_job?(@job) %>
+      <%= button_to "Mark Stage as Complete", job_status_advancement_path(@job), method: :post, class: "btn btn-advance" %>
+    <% end %>
+    <% if show_terminal_buttons?(@job) %>
+      <%= button_to "Reject", job_rejection_path(@job), method: :post, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-reject" %>
+      <%= button_to "Ghosted", job_ghosting_path(@job), method: :post, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-ghost" %>
+      <%= button_to "Withdraw", job_withdrawal_path(@job), method: :post, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-withdraw" %>
+    <% end %>
+  </div>
+</div>
+
+<h1><%= @job.title %></h1>
+<h3>at <%= link_to @job.company.name, company_path(@job.company) %></h3>
+
+<p><strong>Status:</strong> <%= @job.status.titleize %></p>
+<p><strong>Location:</strong> <%= @job.location.presence || "Unknown" %></p>
+<p>
+  <strong>URL:</strong> 
+  <%= link_to "View Original Posting", @job.url, target: "_blank" if @job.url.present? %>
+</p>
+<p><strong>Added On:</strong> <%= @job.created_at.strftime("%B %d, %Y") %></p>
+
+<% if @job.company.contacts.any? %>
+  <hr>
+  <h3>Company Contacts</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin-bottom: 20px;">
+    <% @job.company.contacts.order(:name).each do |contact| %>
+      <div style="border: 1px solid #e5e7eb; border-radius: 4px; padding: 10px; background: #f9fafb;">
+        <h5 style="margin: 0 0 3px 0;"><%= contact.name %></h5>
+        <% if contact.title.present? %>
+          <div style="font-size: 12px; color: #6b7280; font-style: italic; margin-bottom: 5px;"><%= contact.title %></div>
+        <% end %>
+        <% if contact.email.present? %>
+          <div style="font-size: 13px;"><%= mail_to contact.email, contact.email %></div>
+        <% end %>
+        <% if contact.phone.present? %>
+          <div style="font-size: 13px;"><%= link_to contact.phone, "tel:#{contact.phone}" %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<hr>
+<h3>Activity Timeline</h3>
+
+<turbo-frame id="new_activity">
+  <div style="margin-bottom: 20px;">
+    <%= link_to "Log Activity", new_job_activity_path(@job), class: "btn btn-advance" %>
+  </div>
+</turbo-frame>
+
+<div id="activities_feed">
+  <% if @activities.any? %>
+    <%= render @activities %>
+  <% else %>
+    <p>No activities logged yet.</p>
+  <% end %>
+</div>
+
+<br>
+<%= link_to "Back to Jobs", jobs_path %> | 
+<%= button_to "Delete Job", job_path(@job), method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to delete this job?' } }, style: "color: red; background: none; border: none; cursor: pointer; display: inline;" %>

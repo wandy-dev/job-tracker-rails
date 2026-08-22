@@ -1,0 +1,17 @@
+<%= turbo_stream.replace "contacts_feed" do %>
+  <div id="contacts_feed">
+    <% if @company.contacts.any? %>
+      <%= render @company.contacts.order(:name) %>
+    <% else %>
+      <p>No contacts added yet.</p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "new_contact" do %>
+  <turbo-frame id="new_contact">
+    <div style="margin-bottom: 20px;">
+      <%= link_to "Add Contact", new_company_contact_path(@company), class: "btn btn-advance" %>
+    </div>
+  </turbo-frame>
+<% end %>

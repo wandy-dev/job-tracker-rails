@@ -1,0 +1,19 @@
+<h1>My Job Applications</h1>
+
+<%= link_to "Track a New Job via Link", new_job_path %> | 
+<%= link_to "View Companies", companies_path %>
+
+<hr>
+
+<% if @jobs.any? %>
+  <ul>
+    <% @jobs.each do |job| %>
+      <li>
+        <%= link_to job.title, job_path(job) %> at <strong><%= link_to job.company.name, company_path(job.company) %></strong>
+        - <em><%= job.status.titleize %></em>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You aren't tracking any jobs yet.</p>
+<% end %>

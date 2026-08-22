@@ -1,0 +1,17 @@
+<h1>Companies</h1>
+
+<%= link_to "Back to Jobs", jobs_path %>
+<hr>
+
+<% if @companies.any? %>
+  <ul>
+    <% @companies.each do |company| %>
+      <li>
+        <%= link_to company.name, company_path(company) %> 
+        (<%= pluralize(company.jobs.count, "job") %>)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You haven't tracked any jobs at companies yet.</p>
+<% end %>

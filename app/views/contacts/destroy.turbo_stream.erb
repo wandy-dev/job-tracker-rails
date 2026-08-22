@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "contacts_feed" do %>
+  <div id="contacts_feed">
+    <% if @company.contacts.any? %>
+      <%= render @company.contacts.order(:name) %>
+    <% else %>
+      <p>No contacts added yet.</p>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job: one
+  action_type: 1
+  occurred_at: 2026-08-21 23:50:45
+  notes: MyText
+
+two:
+  job: two
+  action_type: 1
+  occurred_at: 2026-08-21 23:50:45
+  notes: MyText
