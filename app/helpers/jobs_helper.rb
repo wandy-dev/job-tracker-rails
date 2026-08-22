@@ -1,12 +1,14 @@
 module JobsHelper
   def chevron_step_class(job, step_index)
     current_index = Job::HAPPY_PATH_STATUSES.index(job.status) || -1
-    classes = ["chevron-step"]
+    classes = ["is-size-7-mobile"]
     
     if step_index < current_index
-      classes << "completed"
+      classes << "has-text-success has-text-weight-semibold"
     elsif step_index == current_index
-      classes << "current"
+      classes << "has-text-link has-text-weight-bold"
+    else
+      classes << "has-text-grey"
     end
     
     classes.join(" ")

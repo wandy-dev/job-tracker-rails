@@ -1,17 +1,27 @@
-<h1>Companies</h1>
+<div class="mb-4">
+  <%= link_to "&larr; Back to Jobs".html_safe, jobs_path, class: "has-text-grey" %>
+</div>
 
-<%= link_to "Back to Jobs", jobs_path %>
-<hr>
+<div class="is-flex is-justify-content-space-between is-align-items-flex-end mb-6">
+  <div>
+    <h1 class="title is-2 mb-2">Companies</h1>
+    <h2 class="subtitle is-5 has-text-grey">Organizations you've tracked jobs for</h2>
+  </div>
+</div>
 
 <% if @companies.any? %>
-  <ul>
+  <div class="grid is-gap-4" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
     <% @companies.each do |company| %>
-      <li>
-        <%= link_to company.name, company_path(company) %> 
-        (<%= pluralize(company.jobs.count, "job") %>)
-      </li>
+      <%= link_to company_path(company), class: "box is-block is-flex is-flex-direction-column is-justify-content-center has-text-centered", style: "height: 100%; border: 1px solid #e5e7eb; box-shadow: none;" do %>
+        <p class="title is-4 mb-2 has-text-dark"><%= company.name %></p>
+        <p class="subtitle is-6 has-text-grey mt-0">
+          <%= pluralize(company.jobs.count, "job") %> tracked
+        </p>
+      <% end %>
     <% end %>
-  </ul>
+  </div>
 <% else %>
-  <p>You haven't tracked any jobs at companies yet.</p>
+  <div class="notification is-light has-text-centered p-5 mt-4">
+    <p class="is-size-5 has-text-grey mb-3">You haven't tracked any jobs at companies yet.</p>
+  </div>
 <% end %>

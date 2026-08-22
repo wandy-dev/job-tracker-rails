@@ -1,12 +1,12 @@
-<div id="<%= dom_id(activity) %>" style="border-left: 3px solid #2563eb; padding-left: 15px; margin-bottom: 20px;">
-  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px;">
+<div id="<%= dom_id(activity) %>" class="box pl-4 mb-5" style="border-left: 4px solid #485fc7; border-radius: 0 4px 4px 0;">
+  <div class="is-flex is-justify-content-space-between is-align-items-baseline mb-2">
     <strong><%= activity.action_type.titleize %></strong>
-    <span style="color: #6b7280; font-size: 14px;"><%= activity.occurred_at&.strftime("%B %d, %Y %I:%M %p") %></span>
+    <span class="has-text-grey is-size-7"><%= activity.occurred_at&.strftime("%B %d, %Y %I:%M %p") %></span>
   </div>
   <% if activity.notes.present? %>
-    <p style="margin: 0; color: #374151;"><%= activity.notes %></p>
+    <p class="has-text-dark"><%= activity.notes %></p>
   <% end %>
-  <div style="margin-top: 5px;">
-    <%= button_to "Delete", job_activity_path(activity.job, activity), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-reject", style: "font-size: 12px; padding: 2px 6px;" %>
+  <div class="mt-2">
+    <%= button_to "Delete", job_activity_path(activity.job, activity), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "button is-danger", style: "font-size: 12px; padding: 2px 6px;" %>
   </div>
 </div>

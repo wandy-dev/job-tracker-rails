@@ -10,8 +10,8 @@
 
 <%= turbo_stream.replace "new_activity" do %>
   <turbo-frame id="new_activity">
-    <div style="margin-bottom: 20px;">
-      <%= link_to "Log Activity", new_job_activity_path(@job), class: "btn btn-advance" %>
+    <div class="mb-5">
+      <%= link_to "Log Activity", new_job_activity_path(@job), class: "button is-link" %>
     </div>
   </turbo-frame>
 <% end %>

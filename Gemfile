@@ -66,3 +66,6 @@ group :test do
 end
 
 gem "rspec-rails", "~> 8.0", :groups => [:development, :test]
+
+gem "bulma-rails", "~> 1.0"
+gem "dartsass-rails", "~> 0.5.1"

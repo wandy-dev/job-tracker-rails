@@ -1,36 +1,36 @@
 <%= turbo_frame_tag "new_contact" do %>
-  <div style="background: #f9fafb; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+  <div class="box has-background-light mb-5">
     <%= form_with(model: [@company, @contact]) do |f| %>
-      <div style="display: flex; gap: 15px; margin-bottom: 10px;">
-        <div style="flex: 1;">
+      <div class="columns is-mobile mb-2">
+        <div class="column">
           <%= f.label :name, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
           <%= f.text_field :name, required: true, style: "width: 100%; padding: 6px;" %>
         </div>
-        <div style="flex: 1;">
+        <div class="column">
           <%= f.label :title, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
           <%= f.text_field :title, style: "width: 100%; padding: 6px;" %>
         </div>
       </div>
       
-      <div style="display: flex; gap: 15px; margin-bottom: 10px;">
-        <div style="flex: 1;">
+      <div class="columns is-mobile mb-2">
+        <div class="column">
           <%= f.label :email, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
           <%= f.email_field :email, style: "width: 100%; padding: 6px;" %>
         </div>
-        <div style="flex: 1;">
+        <div class="column">
           <%= f.label :phone, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
           <%= f.telephone_field :phone, style: "width: 100%; padding: 6px;" %>
         </div>
       </div>
       
-      <div style="margin-bottom: 15px;">
+      <div class="field mb-3">
         <%= f.label :notes, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
         <%= f.text_area :notes, rows: 2, style: "width: 100%; padding: 6px;" %>
       </div>
       
-      <div style="display: flex; gap: 10px;">
-        <%= f.submit "Add Contact", class: "btn btn-advance" %>
-        <%= link_to "Cancel", company_path(@company), class: "btn" %>
+      <div class="buttons">
+        <%= f.submit "Add Contact", class: "button is-link" %>
+        <%= link_to "Cancel", company_path(@company), class: "button" %>
       </div>
     <% end %>
   </div>

@@ -1,33 +1,33 @@
-<div id="<%= dom_id(contact) %>" style="border: 1px solid #e5e7eb; border-radius: 6px; padding: 15px; margin-bottom: 15px; background: white;">
-  <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<div id="<%= dom_id(contact) %>" class="box mb-4">
+  <div class="is-flex is-justify-content-space-between is-align-items-flex-start">
     <div>
-      <h4 style="margin: 0 0 5px 0;"><%= contact.name %></h4>
+      <h4 class="title is-5 mb-1"><%= contact.name %></h4>
       <% if contact.title.present? %>
-        <div style="color: #6b7280; font-style: italic; margin-bottom: 10px;"><%= contact.title %></div>
+        <div class="subtitle is-6 has-text-grey is-italic mb-3"><%= contact.title %></div>
       <% end %>
       
       <% if contact.email.present? %>
-        <div style="margin-bottom: 5px;">
+        <div class="mb-2">
           <strong>Email:</strong> <%= mail_to contact.email, contact.email %>
         </div>
       <% end %>
       
       <% if contact.phone.present? %>
-        <div style="margin-bottom: 5px;">
+        <div class="mb-2">
           <strong>Phone:</strong> <%= link_to contact.phone, "tel:#{contact.phone}" %>
         </div>
       <% end %>
       
       <% if contact.notes.present? %>
-        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #f3f4f6;">
-          <strong style="display: block; margin-bottom: 3px;">Notes:</strong>
+        <div class="mt-3 pt-3" style="border-top: 1px solid #ededed;">
+          <strong class="is-block mb-1 has-text-weight-bold">Notes:</strong>
           <%= contact.notes %>
         </div>
       <% end %>
     </div>
     
     <div>
-      <%= button_to "Delete", company_contact_path(contact.company, contact), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-reject", style: "font-size: 12px; padding: 2px 6px;" %>
+      <%= button_to "Delete", company_contact_path(contact.company, contact), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "button is-danger is-small is-light" %>
     </div>
   </div>
 </div>

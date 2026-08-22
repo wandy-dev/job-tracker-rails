@@ -1,19 +1,59 @@
-<h1>My Job Applications</h1>
-
-<%= link_to "Track a New Job via Link", new_job_path %> | 
-<%= link_to "View Companies", companies_path %>
-
-<hr>
+<div class="is-flex is-justify-content-space-between is-align-items-flex-end mb-6 is-flex-wrap-wrap" style="gap: 15px;">
+  <div>
+    <h1 class="title is-2 mb-2">My Job Applications</h1>
+    <h2 class="subtitle is-5 has-text-grey">Track and manage your active opportunities</h2>
+  </div>
+  <div class="buttons is-marginless">
+    <%= link_to "View Companies", companies_path, class: "button is-light" %>
+    <%= link_to "Track New Job", new_job_path, class: "button is-link" %>
+  </div>
+</div>
 
 <% if @jobs.any? %>
-  <ul>
+  <div class="is-flex is-flex-direction-column" style="gap: 1rem;">
     <% @jobs.each do |job| %>
-      <li>
-        <%= link_to job.title, job_path(job) %> at <strong><%= link_to job.company.name, company_path(job.company) %></strong>
-        - <em><%= job.status.titleize %></em>
-      </li>
+      <div class="box p-4 is-flex is-justify-content-space-between is-align-items-center is-flex-wrap-wrap" style="border: 1px solid #f5f5f5; gap: 15px;">
+        <div>
+          <h3 class="title is-4 mb-1">
+            <%= link_to job.title, job_path(job), class: "has-text-dark" %>
+          </h3>
+          <p class="subtitle is-6 mb-2">
+            at <strong><%= link_to job.company.name, company_path(job.company), class: "has-text-grey-dark" %></strong>
+            <% if job.location.present? %>
+              <span class="has-text-grey-light mx-2">|</span>
+              <span class="has-text-grey"><%= job.location %></span>
+            <% end %>
+          </p>
+          <p class="is-size-7 has-text-grey">
+            Added <%= job.created_at.strftime("%b %d, %Y") %>
+          </p>
+        </div>
+        
+        <div class="has-text-right">
+          <%
+             status_class = case job.status
+                            when 'offered' then 'is-success'
+                            when 'rejected', 'ghosted' then 'is-danger is-light'
+                            when 'withdrawn' then 'is-warning is-light'
+                            when 'applied' then 'is-info is-light'
+                            when 'interviewing' then 'is-link'
+                            when 'preparing' then 'is-primary is-light'
+                            else 'is-light'
+                            end
+          %>
+          <span class="tag <%= status_class %> is-medium mb-2">
+            <%= job.status.titleize %>
+          </span>
+          <br>
+          <%= link_to "View Details &rarr;".html_safe, job_path(job), class: "is-size-7 has-text-link" %>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
-  <p>You aren't tracking any jobs yet.</p>
+  <div class="notification is-light has-text-centered p-6 mt-4">
+    <h3 class="title is-4 has-text-grey mb-3">You aren't tracking any jobs yet</h3>
+    <p class="subtitle is-6 has-text-grey mb-5">Start by tracking a job posting link or manually creating one.</p>
+    <%= link_to "Track a New Job", new_job_path, class: "button is-link is-medium" %>
+  </div>
 <% end %>

@@ -10,8 +10,8 @@
 
 <%= turbo_stream.replace "new_contact" do %>
   <turbo-frame id="new_contact">
-    <div style="margin-bottom: 20px;">
-      <%= link_to "Add Contact", new_company_contact_path(@company), class: "btn btn-advance" %>
+    <div class="mb-5">
+      <%= link_to "Add Contact", new_company_contact_path(@company), class: "button is-link" %>
     </div>
   </turbo-frame>
 <% end %>
