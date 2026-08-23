@@ -3,10 +3,6 @@
     <h1 class="title is-2 mb-2">My Job Applications</h1>
     <h2 class="subtitle is-5 has-text-grey">Track and manage your active opportunities</h2>
   </div>
-  <div class="buttons is-marginless">
-    <%= link_to "View Companies", companies_path, class: "button is-light" %>
-    <%= link_to "Track New Job", new_job_path, class: "button is-link" %>
-  </div>
 </div>
 
 <% if @jobs.any? %>
@@ -28,7 +24,7 @@
             Added <%= job.created_at.strftime("%b %d, %Y") %>
           </p>
         </div>
-        
+
         <div class="has-text-right">
           <%
              status_class = case job.status

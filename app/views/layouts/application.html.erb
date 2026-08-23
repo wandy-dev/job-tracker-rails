@@ -24,14 +24,35 @@
   </head>
 
   <body>
-    <% if notice %>
-      <div class="notification is-success mb-4"><%= notice %></div>
-    <% end %>
-    <% if alert %>
-      <div class="notification is-danger mb-4"><%= alert %></div>
-    <% end %>
+    <nav class="navbar is-dark mb-5" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <%= link_to "VoidTracker", root_path, class: "navbar-item has-text-weight-bold is-size-4 is-family-monospace" %>
+        </div>
 
-    <div class="container">
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <%= link_to "Jobs", jobs_path, class: "navbar-item" %>
+            <%= link_to "Companies", companies_path, class: "navbar-item" %>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <%= link_to "Track New Job", new_job_path, class: "button is-link is-light is-small is-rounded has-text-weight-bold" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container px-4">
+      <% if notice %>
+        <div class="notification is-success mb-4"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="notification is-danger mb-4"><%= alert %></div>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>
