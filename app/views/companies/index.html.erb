@@ -1,12 +1,12 @@
-<div class="mb-4">
-  <%= link_to "&larr; Back to Jobs".html_safe, jobs_path, class: "has-text-grey" %>
-</div>
-
-<div class="is-flex is-justify-content-space-between is-align-items-flex-end mb-6">
+<div class="is-flex is-justify-content-space-between is-align-items-flex-end mb-2">
   <div>
     <h1 class="title is-2 mb-2">Companies</h1>
     <h2 class="subtitle is-5 has-text-grey">Organizations you've tracked jobs for</h2>
   </div>
+</div>
+
+<div class="mb-4">
+  <%= link_to "&larr; Back to Jobs".html_safe, jobs_path, class: "has-text-grey" %>
 </div>
 
 <% if @companies.any? %>
